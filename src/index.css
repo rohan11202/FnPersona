@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body .dark {
-  color: white;
-}
 
 @layer base {
   :root {
