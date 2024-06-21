@@ -65,54 +65,54 @@ const BackgroundCircles = ({ parallaxRef }) => {
   }, []);
 
   return (
-    <div className="absolute top-[50%] left-1/2 w-[78rem] aspect-square border border-n-2/5 rounded-full -translate-x-1/2 -translate-y-1/2 mx-auto ">
+    <div className='absolute top-1/2 left-1/2 w-[78rem] dark:border-white/40 aspect-square border border-n-2/5 rounded-full -translate-x-1/2 -translate-y-1/2 mx-auto overflow-hidden'>
       <Rings />
 
       <MouseParallax strength={0.07} parallaxContainerRef={parallaxRef}>
-        <div className="absolute bottom-1/2 left-1/2 w-0.25 h-1/2 origin-bottom rotate-[46deg]">
+        <div className='absolute bottom-1/2 left-1/2 w-0.25 h-1/2 origin-bottom rotate-[46deg]'>
           <div
             className={`w-2 h-2 -ml-1 -mt-36 bg-gradient-to-b from-[#656464] to-[#1A1A32] rounded-full transition-transform duration-500 ease-out ${
-              mounted ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+              mounted ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           />
         </div>
 
-        <div className="absolute bottom-1/2 left-1/2 w-0.25 h-1/2 origin-bottom -rotate-[56deg]">
+        <div className='absolute bottom-1/2 left-1/2 w-0.25 h-1/2 origin-bottom -rotate-[56deg]'>
           <div
             className={`w-4 h-4 -ml-1 -mt-32 bg-gradient-to-b from-[#bdbcbb] to-[#1A1A32] rounded-full transition-transform duration-500 ease-out ${
-              mounted ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+              mounted ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           />
         </div>
 
-        <div className="absolute bottom-1/2 left-1/2 w-0.25 h-1/2 origin-bottom rotate-[54deg]">
+        <div className='absolute bottom-1/2 left-1/2 w-0.25 h-1/2 origin-bottom rotate-[54deg]'>
           <div
             className={`hidden w-4 h-4 -ml-1 mt-[12.9rem] bg-gradient-to-b from-[#B9AEDF] to-[#1A1A32] rounded-full xl:block transit transition-transform duration-500 ease-out ${
-              mounted ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+              mounted ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           />
         </div>
 
-        <div className="absolute bottom-1/2 left-1/2 w-0.25 h-1/2 origin-bottom -rotate-[65deg]">
+        <div className='absolute bottom-1/2 left-1/2 w-0.25 h-1/2 origin-bottom -rotate-[65deg]'>
           <div
             className={`w-3 h-3 -ml-1.5 mt-52 bg-gradient-to-b from-[#B9AEDF] to-[#1A1A32] rounded-full transition-transform duration-500 ease-out ${
-              mounted ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+              mounted ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           />
         </div>
 
-        <div className="absolute bottom-1/2 left-1/2 w-0.25 h-1/2 origin-bottom -rotate-[85deg]">
+        <div className='absolute bottom-1/2 left-1/2 w-0.25 h-1/2 origin-bottom -rotate-[85deg]'>
           <div
             className={`w-6 h-6 -ml-3 -mt-3 bg-gradient-to-b from-[#959696] to-[#1A1A32] rounded-full transition-transform duration-500 ease-out ${
-              mounted ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+              mounted ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           />
         </div>
 
-        <div className="absolute bottom-1/2 left-1/2 w-0.25 h-1/2 origin-bottom rotate-[70deg]">
+        <div className='absolute bottom-1/2 left-1/2 w-0.25 h-1/2 origin-bottom rotate-[70deg]'>
           <div
             className={`w-6 h-6 -ml-3 -mt-3 bg-gradient-to-b from-[#0a0a0a] to-[#1A1A32] rounded-full transition-transform duration-500 ease-out ${
-              mounted ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+              mounted ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
           />
         </div>
@@ -137,7 +137,7 @@ export const Hero = () => {
   useEffect(() => {
     if (parallaxContainer.current) {
       const parallaxInstance = new Parallax(parallaxContainer.current);
-      return () => parallaxInstance.destroy(); 
+      return () => parallaxInstance.destroy();
     }
   }, []);
 
@@ -179,7 +179,7 @@ export const Hero = () => {
       </div>
       <div
         ref={parallaxContainer}
-        className='parallax-container absolute inset-0 z-0 pointer-events-none'
+        className='parallax-container absolute inset-0 z-0 pointer-events-none hidden sm:block '
       >
         <BackgroundCircles parallaxRef={parallaxContainer} />
       </div>
@@ -198,12 +198,22 @@ export const HeroButton = () => {
 };
 
 const Rings = () => {
+  const circles = [
+    { size: '65.875rem', border: 'border-black/40 dark:border-white/30' },
+    { size: '51.375rem', border: 'border-black/30 dark:border-white/20' },
+    { size: '36.125rem', border: 'border-black/20 dark:border-white/10' },
+    { size: '23.125rem', border: 'border-black/10 dark:border-white/5' },
+  ];
+
   return (
     <>
-      <div className="absolute dark:border-white/40 border-black/40 top-1/2 left-1/2 w-[65.875rem] aspect-square border border-n-2/10 rounded-full -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute dark:border-white/30 border-black/30 top-1/2 left-1/2 w-[51.375rem] aspect-square border border-n-2/10 rounded-full -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute dark:border-white/20 border-black/20 top-1/2 left-1/2 w-[36.125rem] aspect-square border border-n-2/10 rounded-full -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute dark:border-white/10 border-black/10 top-1/2 left-1/2 w-[23.125rem] aspect-square border border-n-2/10 rounded-full -translate-x-1/2 -translate-y-1/2" />
+      {circles.map((circle, index) => (
+        <div
+          key={index}
+          className={`absolute top-1/2 left-1/2 aspect-square ${circle.border} ${circle.bg} border rounded-full -translate-x-1/2 -translate-y-1/2`}
+          style={{ width: circle.size }}
+        />
+      ))}
     </>
   );
 };
