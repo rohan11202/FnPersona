@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 import { Sheet, SheetTrigger, SheetContent } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
@@ -12,30 +11,46 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className='fixed top-0 left-0 z-50 w-full bg-background/80 backdrop-blur-md border-b border-1 border-gray-200 dark:border-white/20'
+      className='fixed top-0 left-0 z-50 w-full bg-background/80  backdrop-blur-md border-b border-1 border-gray-200 dark:border-white/20'
     >
       <div className='container flex h-16 items-center justify-between px-4 md:px-6'>
-        <Link to='/' className='flex items-center gap-2 text-lg font-semibold'>
-          <img src={logo} className='h-5 sm:h-6 w-auto dark:invert' alt='logo' />
-          <p className='sm:text-[18px] text-[15px]'>FnPersona</p>
-        </Link>
+        <div className='flex items-center gap-5'>
+          <Link
+            to='/'
+            className='flex items-center gap-2 text-lg font-semibold'
+          >
+            <img
+              src={logo}
+              className='h-5 sm:h-6 w-auto dark:invert'
+              alt='logo'
+            />
+            <p className='sm:text-[18px] text-[15px]'>FnPersona</p>
+          </Link>
+          <div className='hidden md:flex gap-5 ml-2 pt-1'>
+            <Link
+              to='/'
+              className='hover:underline hover:underline-offset-4  text-sm dark:text-[#888888] font-medium text-gray-500'
+            >
+              Home
+            </Link>
+            <Link
+              to='/about'
+              className='hover:underline hover:underline-offset-4 text-sm dark:text-[#888888] font-medium text-gray-500'
+            >
+              About
+            </Link>
+            <Link
+              to='/services'
+              className='hover:underline hover:underline-offset-4 text-sm dark:text-[#888888] font-medium text-gray-500'
+            >
+              Services
+            </Link>
+          </div>
+        </div>
         <nav className='hidden gap-6 text-sm font-medium md:flex items-center'>
-          <Link to='/' className='hover:underline hover:underline-offset-4 '>
-            Home
-          </Link>
-          <Link
-            to='/about'
-            className='hover:underline hover:underline-offset-4'
-          >
-            About
-          </Link>
-          <Link
-            to='/services'
-            className='hover:underline hover:underline-offset-4'
-          >
-            Services
-          </Link>
+          <Button variant='outline'>Learn more</Button>
           <ModeToggle />
+          <Button>Sign up</Button>
         </nav>
         <Sheet>
           <SheetTrigger asChild>
