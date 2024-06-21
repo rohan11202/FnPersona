@@ -1,15 +1,18 @@
+import React, { useEffect, useRef, useState } from 'react';
 import Section from '@/components/section/Section';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { FlipWords } from '@/utils/FlipWords';
 import { TypewriterEffectSmooth } from '@/utils/typewriter-effect';
 import { FaArrowRight } from 'react-icons/fa';
+import Parallax from 'parallax-js';
+import { MouseParallax } from 'react-just-parallax';
 
 const Spotlight = ({ className, fill }) => {
   return (
     <svg
       className={cn(
-        'animate-spotlight pointer-events-none absolute z-[1]  h-[169%] w-[138%] lg:w-[84%] opacity-0',
+        'animate-spotlight pointer-events-none absolute z-[1] h-[169%] w-[138%] lg:w-[84%] opacity-0',
         className
       )}
       xmlns='http://www.w3.org/2000/svg'
@@ -54,6 +57,70 @@ const Spotlight = ({ className, fill }) => {
   );
 };
 
+const BackgroundCircles = ({ parallaxRef }) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  return (
+    <div className="absolute top-[50%] left-1/2 w-[78rem] aspect-square border border-n-2/5 rounded-full -translate-x-1/2 -translate-y-1/2 mx-auto ">
+      <Rings />
+
+      <MouseParallax strength={0.07} parallaxContainerRef={parallaxRef}>
+        <div className="absolute bottom-1/2 left-1/2 w-0.25 h-1/2 origin-bottom rotate-[46deg]">
+          <div
+            className={`w-2 h-2 -ml-1 -mt-36 bg-gradient-to-b from-[#656464] to-[#1A1A32] rounded-full transition-transform duration-500 ease-out ${
+              mounted ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+            }`}
+          />
+        </div>
+
+        <div className="absolute bottom-1/2 left-1/2 w-0.25 h-1/2 origin-bottom -rotate-[56deg]">
+          <div
+            className={`w-4 h-4 -ml-1 -mt-32 bg-gradient-to-b from-[#bdbcbb] to-[#1A1A32] rounded-full transition-transform duration-500 ease-out ${
+              mounted ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+            }`}
+          />
+        </div>
+
+        <div className="absolute bottom-1/2 left-1/2 w-0.25 h-1/2 origin-bottom rotate-[54deg]">
+          <div
+            className={`hidden w-4 h-4 -ml-1 mt-[12.9rem] bg-gradient-to-b from-[#B9AEDF] to-[#1A1A32] rounded-full xl:block transit transition-transform duration-500 ease-out ${
+              mounted ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+            }`}
+          />
+        </div>
+
+        <div className="absolute bottom-1/2 left-1/2 w-0.25 h-1/2 origin-bottom -rotate-[65deg]">
+          <div
+            className={`w-3 h-3 -ml-1.5 mt-52 bg-gradient-to-b from-[#B9AEDF] to-[#1A1A32] rounded-full transition-transform duration-500 ease-out ${
+              mounted ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+            }`}
+          />
+        </div>
+
+        <div className="absolute bottom-1/2 left-1/2 w-0.25 h-1/2 origin-bottom -rotate-[85deg]">
+          <div
+            className={`w-6 h-6 -ml-3 -mt-3 bg-gradient-to-b from-[#959696] to-[#1A1A32] rounded-full transition-transform duration-500 ease-out ${
+              mounted ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+            }`}
+          />
+        </div>
+
+        <div className="absolute bottom-1/2 left-1/2 w-0.25 h-1/2 origin-bottom rotate-[70deg]">
+          <div
+            className={`w-6 h-6 -ml-3 -mt-3 bg-gradient-to-b from-[#0a0a0a] to-[#1A1A32] rounded-full transition-transform duration-500 ease-out ${
+              mounted ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+            }`}
+          />
+        </div>
+      </MouseParallax>
+    </div>
+  );
+};
+
 export const Hero = () => {
   const words = [
     { text: 'Master', className: 'text-3xl sm:text-6xl' },
@@ -65,10 +132,19 @@ export const Hero = () => {
     },
   ];
 
+  const parallaxContainer = useRef(null);
+
+  useEffect(() => {
+    if (parallaxContainer.current) {
+      const parallaxInstance = new Parallax(parallaxContainer.current);
+      return () => parallaxInstance.destroy(); 
+    }
+  }, []);
+
   return (
     <Section
       customPaddings='py-[50%] md:py-[25%]'
-      className=' h-[40rem] w-full rounded-md flex md:items-center md:justify-center dark:bg-black/[0.96] antialiased dark:bg-grid-white/[0.05] bg-grid-black/[0.05] relative overflow-hidden'
+      className='h-[40rem] w-full rounded-md flex md:items-center md:justify-center dark:bg-black/[0.96] antialiased dark:bg-grid-white/[0.05] bg-grid-black/[0.05] relative overflow-hidden'
     >
       <Spotlight
         className='-top-25 sm:-top-40 left-0 md:left-60 md:-top-20'
@@ -92,7 +168,7 @@ export const Hero = () => {
           words={words}
           className='text-5xl sm:text-7xl flex justify-center'
         />
-        <p className=' font-semibold text-[14px] md:text-xl dark:text-neutral-400 text-neutral-600 max-w-lg text-center mx-auto'>
+        <p className='font-semibold text-[14px] md:text-xl dark:text-neutral-400 text-neutral-600 max-w-lg text-center mx-auto'>
           Achieve financial independence and manage your finances effortlessly
           with FnPersona.
         </p>
@@ -100,6 +176,12 @@ export const Hero = () => {
         <div className='flex justify-center mt-4'>
           <HeroButton />
         </div>
+      </div>
+      <div
+        ref={parallaxContainer}
+        className='parallax-container absolute inset-0 z-0 pointer-events-none'
+      >
+        <BackgroundCircles parallaxRef={parallaxContainer} />
       </div>
     </Section>
   );
@@ -112,5 +194,16 @@ export const HeroButton = () => {
     <button className='inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-neutral-600 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 focus:ring-offset-neutral-50'>
       <FlipWords words={words} />
     </button>
+  );
+};
+
+const Rings = () => {
+  return (
+    <>
+      <div className="absolute dark:border-white/40 border-black/40 top-1/2 left-1/2 w-[65.875rem] aspect-square border border-n-2/10 rounded-full -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute dark:border-white/30 border-black/30 top-1/2 left-1/2 w-[51.375rem] aspect-square border border-n-2/10 rounded-full -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute dark:border-white/20 border-black/20 top-1/2 left-1/2 w-[36.125rem] aspect-square border border-n-2/10 rounded-full -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute dark:border-white/10 border-black/10 top-1/2 left-1/2 w-[23.125rem] aspect-square border border-n-2/10 rounded-full -translate-x-1/2 -translate-y-1/2" />
+    </>
   );
 };
