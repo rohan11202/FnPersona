@@ -10,12 +10,26 @@ import { ThemeProvider } from './components/theme/theme-provider';
 import Home from './routes/Home';
 import RootLayout from './layout/RootLayout';
 import Preloader from './components/loader/Preloader';
+import SignUp from './routes/SignUp';
+import ProtectedRoute from './context/ProtectedRoute';
+import Dashboard from './routes/Dashboard';
+import SignIn from './routes/SignIn';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path='/' element={<RootLayout />}>
         <Route index element={<Home />} />
+        <Route path="signin" element={<SignIn />} />
+        <Route path='signup' element={<SignUp />} />
+        <Route
+              path="dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
       </Route>
     </Route>
   )

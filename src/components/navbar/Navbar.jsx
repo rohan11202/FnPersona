@@ -50,7 +50,11 @@ const Navbar = () => {
         <nav className='hidden gap-6 text-sm font-medium md:flex items-center'>
           <Button variant='outline'>Learn more</Button>
           <ModeToggle />
-          <Button>Sign up</Button>
+          <Link to='signup'>
+            <Button className='font-bold hover:bg-black hover:text-white'>
+              Sign up
+            </Button>
+          </Link>
         </nav>
         <Sheet>
           <SheetTrigger asChild>

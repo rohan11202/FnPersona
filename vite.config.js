@@ -9,8 +9,9 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  server: {
-    host: '0.0.0.0',
-    port: 3000,
+
+  optimizeDeps: {
+    exclude: ['react-icons/gr', 'react-router-dom'],
   },
+  envPrefix: 'VITE_',
 });
