@@ -40,6 +40,7 @@ export function SignupFormDemo() {
     email: '',
     password: '',
     dob: null,
+    timezone: ''
   });
   const navigate = useNavigate();
 
@@ -50,6 +51,10 @@ export function SignupFormDemo() {
 
   const handleDateChange = (date) => {
     setFormData({ ...formData, dob: date });
+  };
+
+  const handleTimezoneChange = (value) => {
+    setFormData({ ...formData, timezone: value });
   };
 
   const handleSubmit = (e) => {
@@ -75,11 +80,12 @@ export function SignupFormDemo() {
       !formData.lastname ||
       !formData.email ||
       !formData.password ||
-      !formData.dob
+      !formData.dob ||
+      !formData.timezone
     ) {
       toast({
         title: 'Validation Error',
-        description: 'All fields are required.',
+        description: 'All fields are required, including timezone.',
       });
       return false;
     }
@@ -190,7 +196,7 @@ export function SignupFormDemo() {
                 </p>
               </div>
               <div>
-                <Select>
+                <Select onValueChange={handleTimezoneChange}>
                   <SelectTrigger className='w-full'>
                     <SelectValue placeholder='Select a timezone' />
                   </SelectTrigger>
@@ -244,8 +250,8 @@ export function SignupFormDemo() {
                         India Standard Time (IST)
                       </SelectItem>
                       <SelectItem value='cst_china'>
-                        China Standard Time (CST)
-                      </SelectItem>
+                        China Standard Time (CST
+                          </SelectItem>
                       <SelectItem value='jst'>
                         Japan Standard Time (JST)
                       </SelectItem>
